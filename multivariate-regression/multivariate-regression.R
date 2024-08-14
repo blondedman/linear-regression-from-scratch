@@ -1,12 +1,13 @@
-# resources used: 
+# work in progress
+
+# resources used:
 # library.virginia.edu
-# cran.r-project.org
 
 library(car)
 
 # loading the dataset
 data <- read.table("http://static.lib.virginia.edu/statlab/materials/data/ami_data.DAT")
-names(data) <- c("TOT","AMI","GEN","AMT","PR","DIAP","QRS")
+names(data) <- c("TOT", "AMI", "GEN", "AMT", "PR", "DIAP", "QRS")
 
 # useful functions
 summary(data)
@@ -27,3 +28,7 @@ Anova(mlm2)
 Manova(mlm2)
 
 anova(mlm1, mlm2)
+
+sample <- data.frame(GEN = 1, AMT = 1200)
+p <- predict(mlm2, sample)
+p
