@@ -20,11 +20,11 @@ plt1 = sns.boxplot(sales['TV'], ax = axs[0], orient='h')
 plt2 = sns.boxplot(sales['newspaper'], ax = axs[1], orient='h')
 plt3 = sns.boxplot(sales['radio'], ax = axs[2], orient='h')
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 # correlation graph
 sns.pairplot(sales, x_vars=['TV', 'radio', 'newspaper'], y_vars='sales', height=4, aspect=1, kind='scatter')
-plt.show()
+# plt.show()
 
 x = sales[['TV', 'radio', 'newspaper']]
 y = sales['sales']
@@ -42,3 +42,8 @@ print(list(zip(x, mlr.coef_)))
 
 x_pred = mlr.predict(x_train)
 y_pred = mlr.predict(x_test)  
+
+result = pd.DataFrame({'actual': y_test, 'predicted': y_pred})
+print(result)
+
+print(mlr.score(x,y))
