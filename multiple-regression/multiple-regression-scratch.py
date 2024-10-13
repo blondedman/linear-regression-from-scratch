@@ -26,8 +26,20 @@ class multipleregression:
     db = -2 * np.mean(error)
     return dW, db
   
-  def optimizemodelparametes(self, features, groundtruth, predictions):
+  def optimizemodelparameters(self, features, groundtruth, predictions):
     dW, db = self.gradientdescent(features, groundtruth, predictions)
     self.weight[0] += self.rate * -dW[0]
     self.weight[1] += self.rate * -dW[1]
     self.bias += self.rate * -db
+    
+  def fit(self, X, ytrue, epochs = 10, out = False):    
+    history = {'epoch': [], 'loss': []}
+    for epoch in range(epochs):
+      yhat = self.MLR(X)
+      loss = self.loss(ytrue, yhat)
+      self.optimizemodelparameters(X, ytrue, yhat)
+      if out:
+        print('epoch:', epoch, 'loss:', loss)
+      history['epoch'].append(epoch)
+      history['loss'].append(loss)
+    return history
