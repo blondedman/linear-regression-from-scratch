@@ -12,7 +12,7 @@ class multipleregression:
     self.w = w
     self.b = b
     
-  def MLR(self, features, weights, bias):
+  def MLR(self, features, w, b):
     return (features@self.w) + self.b
 
   def loss(self, groundtruth, predictions):
