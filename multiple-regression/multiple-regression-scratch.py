@@ -31,8 +31,8 @@ def weightplusbias(w, b):
   return weights, bias
 
 class multipleregression:
-  
-  def __init__(self, rate, w, b):
+  # gotta work on this // currently incomplete
+  def __init__(self, rate = 0.001, w = 3, b = 0):
     self.rate = rate
     self.w = w
     self.b = b
@@ -69,6 +69,9 @@ class multipleregression:
       history['loss'].append(loss)
     return history
   
+  def modelcoef(self):
+    return self.weight, self.bias
+  
   
 X = sales[['TV','radio','newspaper']]
 y = sales['sales']
@@ -81,3 +84,18 @@ print(X_train.shape)
 print(y_train.shape)
 print(X_test.shape)
 print(y_test.shape)
+
+model = multipleregression()
+
+history = model.fit(X_train, y_train, epochs = 1000)
+
+def learningcurve(model, history):
+  coef, bias = model.getmodelcoef()
+  plt.figure(figsize = (8,5))
+  plt.plot(history['loss']);
+  plt.title(f'learning curve # learned weights:{coef} and bias:{bias :.2f}')
+  plt.xlabel('epochs')
+  plt.ylabel('mean squared error')
+  plt.show()
+
+learningcurve(model, history)
