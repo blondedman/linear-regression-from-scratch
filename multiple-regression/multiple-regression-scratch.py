@@ -1,12 +1,25 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt 
 
 # loading dataset
 sales = pd.read_csv("multiple-regression\sales.csv")
 
 print(sales.head())
 print(sales.shape)
+
+# visualizing data
+plt.figure(figsize = (15,5))
+plt.subplot(3,3,1)
+sns.regplot(x = 'TV', y ='sales', data = sales, marker = 'x', color = 'lightblue')
+plt.subplot(3,3,2)
+sns.regplot(x = 'radio', y ='sales', data = sales, marker = 'x', color = 'lightblue')
+plt.subplot(3,3,3)
+sns.regplot(x = 'newspaper', y ='sales', data = sales, marker = 'x', color = 'lightblue')
+
+plt.show()
+
 
 def weightplusbias(w, b):
   weights = np.random.rand(w)
