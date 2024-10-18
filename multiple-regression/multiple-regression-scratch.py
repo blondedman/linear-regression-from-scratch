@@ -1,4 +1,12 @@
 import numpy as np
+import pandas as pd
+import seaborn as sns
+
+# loading dataset
+sales = pd.read_csv("multiple-regression\sales.csv")
+
+print(sales.head())
+print(sales.shape)
 
 def weightplusbias(w, b):
   weights = np.random.rand(w)
