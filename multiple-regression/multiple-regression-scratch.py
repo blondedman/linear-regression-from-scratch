@@ -3,6 +3,10 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt 
 
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import root_mean_squared_error 
+from sklearn.model_selection import train_test_split
+
 # loading dataset
 sales = pd.read_csv("multiple-regression\sales.csv")
 
@@ -64,3 +68,16 @@ class multipleregression:
       history['epoch'].append(epoch)
       history['loss'].append(loss)
     return history
+  
+  
+X = sales[['TV','radio','newspaper']]
+y = sales['sales']
+
+print(X.shape)
+print(y.shape)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+print(X_train.shape)
+print(y_train.shape)
+print(X_test.shape)
+print(y_test.shape)
