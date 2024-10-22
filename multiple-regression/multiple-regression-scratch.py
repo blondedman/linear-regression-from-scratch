@@ -22,7 +22,7 @@ sns.regplot(x = 'radio', y ='sales', data = sales, marker = 'x', color = 'lightb
 plt.subplot(3,3,3)
 sns.regplot(x = 'newspaper', y ='sales', data = sales, marker = 'x', color = 'lightblue')
 
-plt.show()
+# plt.show()
 
 
 def weightplusbias(w, b):
@@ -32,12 +32,12 @@ def weightplusbias(w, b):
 
 class multipleregression:
   # gotta work on this // currently incomplete
-  def __init__(self, rate = 0.001, w = 3, b = 0):
+  def __init__(self, rate = 0.001, w = 3, b = 0.001*np.random.rand()):
     self.rate = rate
-    self.w = w
+    self.w = np.random.rand(w)
     self.b = b
     
-  def MLR(self, features, w, b):
+  def MLR(self, features):
     return (features@self.w) + self.b
 
   def loss(self, groundtruth, predictions):
@@ -53,9 +53,9 @@ class multipleregression:
   
   def optimizemodelparameters(self, features, groundtruth, predictions):
     dW, db = self.gradientdescent(features, groundtruth, predictions)
-    self.weight[0] += self.rate * -dW[0]
-    self.weight[1] += self.rate * -dW[1]
-    self.bias += self.rate * -db
+    self.w[0] += self.rate * -dW[0]
+    self.w[1] += self.rate * -dW[1]
+    self.b += self.rate * -db
     
   def fit(self, X, ytrue, epochs = 10, out = False):    
     history = {'epoch': [], 'loss': []}
@@ -70,7 +70,7 @@ class multipleregression:
     return history
   
   def modelcoef(self):
-    return self.weight, self.bias
+    return self.w, self.b
   
   
 X = sales[['TV','radio','newspaper']]
@@ -90,7 +90,7 @@ model = multipleregression()
 history = model.fit(X_train, y_train, epochs = 1000)
 
 def learningcurve(model, history):
-  coef, bias = model.getmodelcoef()
+  coef, bias = model.modelcoef()
   plt.figure(figsize = (8,5))
   plt.plot(history['loss']);
   plt.title(f'learning curve # learned weights:{coef} and bias:{bias :.2f}')
