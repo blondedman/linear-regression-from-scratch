@@ -8,7 +8,13 @@ from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import train_test_split
 
 # loading dataset
-sales = pd.read_csv("multiple-regression\sales.csv")
+sales = pd.read_csv("multiple-regression\sales.csv", dtype = np.float64)
+
+print(sales.head())
+
+sales['TV'] = np.log1p(sales['TV'])
+sales['radio'] = np.log1p(sales['radio'])
+sales['newspaper'] = np.log1p(sales['newspaper'])
 
 print(sales.head())
 print(sales.shape)
@@ -24,11 +30,6 @@ sns.regplot(x = 'newspaper', y ='sales', data = sales, marker = 'x', color = 'li
 
 # plt.show()
 
-
-def weightplusbias(w, b):
-  weights = np.random.rand(w)
-  bias = 0.01 * np.random.rand(b)
-  return weights, bias
 
 class multipleregression:
   
