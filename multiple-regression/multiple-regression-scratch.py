@@ -31,8 +31,8 @@ def weightplusbias(w, b):
   return weights, bias
 
 class multipleregression:
-  # gotta work on this // currently incomplete
-  def __init__(self, rate = 0.001, w = 3, b = 0.001*np.random.rand()):
+  
+  def __init__(self, rate = 0.001, w = 3, b = 0.01*np.random.rand()):
     self.rate = rate
     self.w = np.random.rand(w)
     self.b = b
@@ -41,7 +41,7 @@ class multipleregression:
     return (features@self.w) + self.b
 
   def loss(self, groundtruth, predictions):
-    return np.mean(np.square((groundtruth - predictions)))
+    return np.sqrt(np.mean(np.square((groundtruth - predictions))))
   
   def gradientdescent(self, features, groundtruth, predictions):
     error = groundtruth - predictions
@@ -53,9 +53,9 @@ class multipleregression:
   
   def optimizemodelparameters(self, features, groundtruth, predictions):
     dW, db = self.gradientdescent(features, groundtruth, predictions)
-    self.w[0] += self.rate * -dW[0]
-    self.w[1] += self.rate * -dW[1]
-    self.b += self.rate * -db
+    self.w[0] += self.rate * (-dW[0])
+    self.w[1] += self.rate * (-dW[1])
+    self.b += self.rate * (-db)
     
   def fit(self, X, ytrue, epochs = 10, out = False):    
     history = {'epoch': [], 'loss': []}
