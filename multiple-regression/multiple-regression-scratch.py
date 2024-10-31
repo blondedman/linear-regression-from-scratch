@@ -74,6 +74,10 @@ class multipleregression:
   def modelcoef(self):
     return self.w, self.b
   
+  def predict(self, features):
+    return self.MLR(features)
+    
+  
   
 X = sales[['TV','radio','newspaper']]
 y = sales['sales']
@@ -102,3 +106,8 @@ def learningcurve(model, history):
   plt.show()
 
 learningcurve(model, history)
+
+# predicting test values
+predictions = model.predict(X_test)
+print('MAE ', mean_absolute_error(y_test,predictions))
+print('RMSE', root_mean_squared_error(y_test,predictions))
