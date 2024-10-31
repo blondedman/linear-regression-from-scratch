@@ -76,6 +76,11 @@ class multipleregression:
   
   def predict(self, features):
     return self.MLR(features)
+  
+  def evaluate(self, features, y_test):
+    y_hat = self.predict(features)
+    loss = self.loss(y_test, y_hat)
+    return loss
     
   
   
@@ -109,5 +114,10 @@ learningcurve(model, history)
 
 # predicting test values
 predictions = model.predict(X_test)
-print('MAE ', mean_absolute_error(y_test,predictions))
-print('RMSE', root_mean_squared_error(y_test,predictions))
+print('MAE ', mean_absolute_error(y_test, predictions))
+print('RMSE', root_mean_squared_error(y_test, predictions))
+
+# same as RMSE from sklearn
+# idk why does the code exist
+loss = model.evaluate(X_test, y_test)
+print('loss', loss)
