@@ -31,6 +31,7 @@ sns.regplot(x = 'newspaper', y ='sales', data = sales, marker = 'x', color = 'li
 # plt.show()
 
 
+# multiple regression
 class multipleregression:
   
   def __init__(self, rate = 0.001, w = 3, b = 0.01*np.random.rand()):
@@ -90,6 +91,7 @@ model = multipleregression()
 
 history = model.fit(X_train, y_train, epochs = 1000)
 
+# function to plot learning curve
 def learningcurve(model, history):
   coef, bias = model.modelcoef()
   plt.figure(figsize = (8,5))
