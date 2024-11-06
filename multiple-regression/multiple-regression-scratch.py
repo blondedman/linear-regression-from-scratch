@@ -77,7 +77,8 @@ class multipleregression:
   def predict(self, features):
     return self.MLR(features)
   
-  def evaluate(self, features, y_test):
+  def evaluate(self, features, labels):
+    y_true = labels
     y_hat = self.predict(features)
     loss = self.loss(y_test, y_hat)
     return loss
@@ -98,7 +99,7 @@ print(y_test.shape)
 
 model = multipleregression()
 
-history = model.fit(X_train, y_train, epochs = 1000)
+history = model.fit(X_train, y_train, epochs = 1000, out=True)
 
 # function to plot learning curve
 def learningcurve(model, history):
