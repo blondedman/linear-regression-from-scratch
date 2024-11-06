@@ -59,12 +59,13 @@ class multipleregression:
     self.w[1] += self.rate * (-dW[1])
     self.b += self.rate * (-db)
     
-  def fit(self, X, ytrue, epochs = 10, out = False):    
+  def fit(self, features, labels, epochs = 10, out = False):
+    ytrue = labels
     history = {'epoch': [], 'loss': []}
     for epoch in range(epochs):
-      yhat = self.MLR(X)
+      yhat = self.MLR(features)
       loss = self.loss(ytrue, yhat)
-      self.optimizemodelparameters(X, ytrue, yhat)
+      self.optimizemodelparameters(features, ytrue, yhat)
       if out:
         print('epoch:', epoch, 'loss:', loss)
       history['epoch'].append(epoch)
@@ -78,9 +79,9 @@ class multipleregression:
     return self.MLR(features)
   
   def evaluate(self, features, labels):
-    y_true = labels
-    y_hat = self.predict(features)
-    loss = self.loss(y_test, y_hat)
+    ytest = labels
+    yhat = self.predict(features)
+    loss = self.loss(ytest, yhat)
     return loss
     
   
@@ -91,7 +92,7 @@ y = sales['sales']
 print(X.shape)
 print(y.shape)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True)
 print(X_train.shape)
 print(y_train.shape)
 print(X_test.shape)
@@ -99,7 +100,7 @@ print(y_test.shape)
 
 model = multipleregression()
 
-history = model.fit(X_train, y_train, epochs = 1000, out=True)
+history = model.fit(X_train, y_train, epochs = 10000, out=False)
 
 # function to plot learning curve
 def learningcurve(model, history):
